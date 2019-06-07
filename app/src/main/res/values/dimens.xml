@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fact_category_padding">8dp</dimen>
+    <dimen name="result_font_80">24sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>
