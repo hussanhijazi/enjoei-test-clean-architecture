@@ -1,16 +1,18 @@
 package br.com.hussan.enjoeitest.domain
 
+
+// TODO check nulls
 data class Product(
-    val content: String,
-    val discountPercentage: Int,
     val id: Int,
-    val likesCount: Int,
-    val maximumInstallment: Int,
-    val originalPrice: Int,
-    val photos: List<Photo>,
-    val price: Float,
-    val publishedCommentsCount: Int,
-    val size: String,
     val title: String,
-    val user: User
+    val content: String? = null,
+    val discountPercentage: Int? = null,
+    val likesCount: Int? = null,
+    val maximumInstallment: Int? = null,
+    val originalPrice: Int? = null,
+    val photos: List<Photo>? = null,
+    val price: Float? = null,
+    val publishedCommentsCount: Int? = null,
+    val size: String? = null,
+    val user: User? = null
 )

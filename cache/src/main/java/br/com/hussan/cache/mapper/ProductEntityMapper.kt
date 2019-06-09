@@ -5,11 +5,10 @@ import br.com.hussan.enjoeitest.domain.Product
 
 class ProductEntityMapper : EntityMapper<ProductEntity, Product> {
     override fun mapFromCached(type: ProductEntity): Product {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Product(type.id, type.title)
     }
-
     override fun mapToCached(type: Product): ProductEntity {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return ProductEntity(type.id, type.title)
     }
 
 }

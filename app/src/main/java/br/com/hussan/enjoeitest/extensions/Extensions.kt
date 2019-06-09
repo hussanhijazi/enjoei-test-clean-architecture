@@ -20,11 +20,11 @@ fun TextView.checkTextSize() = when (text.length) {
     else -> textSize.pxToSp(context) == SMALL_FONT
 }
 
-inline fun View.snack(@StringRes messageRes: Int, length: Int = Snackbar.LENGTH_LONG) {
+fun View.snack(@StringRes messageRes: Int, length: Int = Snackbar.LENGTH_LONG) {
     snack(resources.getString(messageRes), length)
 }
 
-inline fun View.snack(
+fun View.snack(
     message: String,
     length: Int = Snackbar.LENGTH_LONG
 ) {
