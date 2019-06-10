@@ -1,18 +1,42 @@
 package br.com.hussan.enjoeitest.binding
 
-import android.widget.TextView
+import android.util.Log
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import br.com.hussan.enjoeitest.extensions.spToPx
+import br.com.hussan.enjoeitest.domain.Avatar
+import br.com.hussan.enjoeitest.domain.Photo
+import com.cloudinary.android.MediaManager
+import com.squareup.picasso.Picasso
 
-const val SMALL_FONT = 16F
-const val BIG_FONT = 24F
-const val MINIMUM_SIZE = 80
 
-@BindingAdapter("setFontSize")
-fun TextView.setFontSize(text: String?) {
-    textSize = if (text?.length ?: 0 > MINIMUM_SIZE)
-        SMALL_FONT.spToPx(context)
-    else
-        BIG_FONT.spToPx(context)
+@BindingAdapter("bind:loadImageProduct")
+fun loadImageProduct(view: ImageView, photos: List<Photo?>) {
+    val imageUrl = photos?.first()?.run {
+        MediaManager.get().url().secure(true).run {
+            transformation(transformation().crop(crop).gravity(gravity).width(view.getMeasuredWidth()).height(view.getMeasuredHeight())).generate(
+                "$publicId.jpg"
+            )
+        }
+    }
+    Picasso.get().load(imageUrl).into(view)
 }
 
+@BindingAdapter("bind:loadImageAvatar")
+fun loadImageAvatar(view: ImageView, avatar: Avatar) {
+
+    val imageUrl = avatar?.run {
+        MediaManager.get().url().secure(true).run {
+            transformation(
+                transformation()
+                    .crop(crop)
+                    .gravity(gravity)
+                    .width(view.measuredWidth)
+                    .height(view.measuredHeight).radius("max")
+            ).generate(
+                "$publicId.jpg"
+            )
+        }
+    }
+    Log.d("h2", imageUrl)
+    Picasso.get().load(imageUrl).into(view)
+}

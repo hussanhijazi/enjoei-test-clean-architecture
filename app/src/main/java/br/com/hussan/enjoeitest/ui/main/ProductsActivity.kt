@@ -3,6 +3,7 @@ package br.com.hussan.enjoeitest.ui.main
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import br.com.hussan.enjoeitest.AppNavigator
 import br.com.hussan.enjoeitest.R
 import br.com.hussan.enjoeitest.domain.Product
@@ -10,7 +11,6 @@ import br.com.hussan.enjoeitest.extensions.add
 import br.com.hussan.enjoeitest.extensions.hide
 import br.com.hussan.enjoeitest.extensions.show
 import br.com.hussan.enjoeitest.extensions.snack
-import com.amitshekhar.DebugDB
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -20,22 +20,23 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
+
 class ProductsActivity : AppCompatActivity() {
 
     private val viewModel: ProductsViewModel by viewModel()
     private val navigator: AppNavigator by inject { parametersOf(this@ProductsActivity) }
     private val compositeDisposable = CompositeDisposable()
+    private val productAdapter by lazy { ProductsAdapter(::goToDetails) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_products)
 
-        setupRecyclerViewFacts()
+        setupRecyclerViewProducts()
         getProducts()
 
-        Log.d("h2", DebugDB.getAddressLog())
-
     }
+
     private fun getProducts() {
         viewModel.getProducts(1)
             .subscribeOn(Schedulers.io())
@@ -46,10 +47,11 @@ class ProductsActivity : AppCompatActivity() {
             .subscribe(::showProducts, ::showError)
             .add(compositeDisposable)
     }
-    private fun showProducts(list: List<Product>) {
-        Log.d("h2", list.toString())
-        if (list.isNotEmpty()) {
+
+    private fun showProducts(items: List<Product>) {
+        if (items.isNotEmpty()) {
             // TODO Set items
+            productAdapter.setItems(items)
             showRecyclerViewFacts()
         } else
             showEmptyState()
@@ -57,12 +59,10 @@ class ProductsActivity : AppCompatActivity() {
 
     private fun showEmptyState() {
         rvProducts.hide()
-        lytEmptyState.show()
     }
 
     private fun showRecyclerViewFacts() {
         rvProducts.show()
-        lytEmptyState.hide()
     }
 
     private fun showError(error: Throwable) {
@@ -76,14 +76,22 @@ class ProductsActivity : AppCompatActivity() {
         else
             progressBar.hide()
     }
-    private fun setupRecyclerViewFacts() {
+
+    private fun setupRecyclerViewProducts() {
         rvProducts.run {
             setHasFixedSize(true)
-            // TODO Set Adapter
+            layoutManager = GridLayoutManager(this@ProductsActivity, 2)
+            adapter = productAdapter
         }
     }
+
+    private fun goToDetails(product: Product) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
     }
 }
+

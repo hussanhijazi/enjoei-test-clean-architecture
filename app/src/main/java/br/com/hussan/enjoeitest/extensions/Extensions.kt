@@ -6,19 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
-import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityOptionsCompat
-import br.com.hussan.enjoeitest.binding.BIG_FONT
-import br.com.hussan.enjoeitest.binding.SMALL_FONT
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-
-fun TextView.checkTextSize() = when (text.length) {
-    in 1..80 -> textSize.pxToSp(context) == BIG_FONT
-    else -> textSize.pxToSp(context) == SMALL_FONT
-}
 
 fun View.snack(@StringRes messageRes: Int, length: Int = Snackbar.LENGTH_LONG) {
     snack(resources.getString(messageRes), length)
