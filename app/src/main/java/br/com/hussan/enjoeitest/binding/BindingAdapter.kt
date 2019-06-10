@@ -1,6 +1,5 @@
 package br.com.hussan.enjoeitest.binding
 
-import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import br.com.hussan.enjoeitest.domain.Avatar
@@ -13,9 +12,13 @@ import com.squareup.picasso.Picasso
 fun loadImageProduct(view: ImageView, photos: List<Photo?>) {
     val imageUrl = photos?.first()?.run {
         MediaManager.get().url().secure(true).run {
-            transformation(transformation().crop(crop).gravity(gravity).width(view.getMeasuredWidth()).height(view.getMeasuredHeight())).generate(
-                "$publicId.jpg"
-            )
+            transformation(
+                transformation()
+                    .crop(crop)
+                    .gravity(gravity)
+                    .width(view.measuredWidth)
+                    .height(view.measuredHeight)
+            ).generate("$publicId.jpg")
         }
     }
     Picasso.get().load(imageUrl).into(view)
@@ -32,11 +35,8 @@ fun loadImageAvatar(view: ImageView, avatar: Avatar) {
                     .gravity(gravity)
                     .width(view.measuredWidth)
                     .height(view.measuredHeight).radius("max")
-            ).generate(
-                "$publicId.jpg"
-            )
+            ).generate("$publicId.jpg")
         }
     }
-    Log.d("h2", imageUrl)
     Picasso.get().load(imageUrl).into(view)
 }

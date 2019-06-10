@@ -9,6 +9,6 @@
     <string name="error_message">An error has occurred. Please try again</string>
     <string name="no_results">No results, try again</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="price_format">R$ %1$f</string>
+    <string name="price_format">R$ %1$s</string>
 
 </resources>

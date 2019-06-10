@@ -33,8 +33,15 @@ class ProductsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_products)
 
         setupRecyclerViewProducts()
+        setupSwipeRefresh()
         getProducts()
 
+    }
+
+    private fun setupSwipeRefresh() {
+        swipeRefresh.setOnRefreshListener {
+            getProducts()
+        }
     }
 
     private fun getProducts() {
@@ -50,9 +57,10 @@ class ProductsActivity : AppCompatActivity() {
 
     private fun showProducts(items: List<Product>) {
         if (items.isNotEmpty()) {
-            // TODO Set items
             productAdapter.setItems(items)
             showRecyclerViewFacts()
+            if (swipeRefresh.isRefreshing)
+                swipeRefresh.isRefreshing = false
         } else
             showEmptyState()
     }
