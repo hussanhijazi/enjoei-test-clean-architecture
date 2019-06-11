@@ -50,6 +50,7 @@ dependencies {
     implementation "com.cloudinary:cloudinary-android:$cloudinaryVersion"
 //    implementation "androidx.paging:paging-runtime:$pagingVersion"
 
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation "junit:junit:$jUnitVersion"
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
     testImplementation "android.arch.core:core-testing:$coreTestingVersion"

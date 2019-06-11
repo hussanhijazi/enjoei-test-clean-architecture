@@ -2,8 +2,10 @@ package br.com.hussan.enjoeitest.ui.main
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import br.com.hussan.enjoeitest.AppNavigator
 import br.com.hussan.enjoeitest.R
@@ -22,21 +24,24 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 
-class ProductsActivity : AppCompatActivity() {
+class ListProductsFragment : Fragment() {
 
     private val viewModel: ProductsViewModel by viewModel()
-    private val navigator: AppNavigator by inject { parametersOf(this@ProductsActivity) }
+    private val navigator: AppNavigator by inject { parametersOf(activity) }
     private val compositeDisposable = CompositeDisposable()
     private val productAdapter by lazy { ProductsAdapter(::goToDetails) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_products)
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.activity_products, container, false)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupRecyclerViewProducts()
         setupSwipeRefresh()
         getProducts()
-
     }
 
     private fun setupSwipeRefresh() {
@@ -89,7 +94,7 @@ class ProductsActivity : AppCompatActivity() {
     private fun setupRecyclerViewProducts() {
         rvProducts.run {
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(this@ProductsActivity, 2)
+            layoutManager = GridLayoutManager(activity, 2)
             adapter = productAdapter
         }
     }
@@ -102,5 +107,6 @@ class ProductsActivity : AppCompatActivity() {
         super.onDestroy()
         compositeDisposable.clear()
     }
-}
 
+
+}
