@@ -35,18 +35,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                    <ImageView
-                            android:id="@+id/imageView"
+                    <br.com.hussan.enjoeitest.views.ImageLoadingView
+                            android:id="@+id/imgProduct"
                             android:layout_width="match_parent"
                             android:layout_height="428dp"
-                            app:loadImageProduct="@{product.photos}"
+                            app:imageLoadingProduct="@{product.photos}"
                             app:layout_collapseMode="parallax"/>
                 </FrameLayout>
 
                 <androidx.appcompat.widget.Toolbar
                         android:background="@drawable/toolbar_gradient"
                         android:id="@+id/toolbar"
-
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
                         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
@@ -106,7 +105,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/txtPrice"
                         android:text="10% off em até 12x"/>
 
-                <br.com.hussan.enjoeitest.CircleIconView
+                <br.com.hussan.enjoeitest.views.CircleIconView
                         android:id="@+id/btnLike"
                         android:layout_width="56dp"
                         android:layout_height="wrap_content"
@@ -117,7 +116,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:icon="@drawable/ic_like"/>
 
-                <br.com.hussan.enjoeitest.CircleIconView
+                <br.com.hussan.enjoeitest.views.CircleIconView
                         android:id="@+id/btnComments"
                         android:layout_width="56dp"
                         android:layout_height="wrap_content"

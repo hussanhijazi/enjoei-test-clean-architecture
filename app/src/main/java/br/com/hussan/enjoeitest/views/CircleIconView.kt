@@ -1,9 +1,10 @@
-package br.com.hussan.enjoeitest
+package br.com.hussan.enjoeitest.views
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import br.com.hussan.enjoeitest.R
 import kotlinx.android.synthetic.main.view_circle_icon_layout.view.*
 
 class CircleIconView @JvmOverloads constructor(
@@ -13,7 +14,8 @@ class CircleIconView @JvmOverloads constructor(
         View.inflate(context, R.layout.view_circle_icon_layout, this)
 
         attrs?.let {
-            val typedArray = context.obtainStyledAttributes(it, R.styleable.CircleIconView, 0, 0)
+            val typedArray = context.obtainStyledAttributes(it,
+                R.styleable.CircleIconView, 0, 0)
 
             val icon = resources.getDrawable(typedArray.getResourceId(R.styleable.CircleIconView_icon, 0), null)
 

@@ -5,11 +5,42 @@ import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityOptionsCompat
+import androidx.fragment.app.FragmentActivity
+import com.cloudinary.android.MediaManager
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+
+
+fun MediaManager.getUrl(publicId: String, crop: String, gravity: String, width: Int, height: Int) =
+    MediaManager.get().url().secure(true).run {
+        transformation(
+            transformation()
+                .crop(crop)
+                .gravity(gravity)
+                .width(width)
+                .height(height)
+        ).generate("$publicId.jpg")
+    }
+
+fun ImageView.loadTransition(activity: FragmentActivity, imageUrl: String?) {
+    imageUrl?.let {
+        Picasso.get().load(imageUrl).noFade().into(this, object : Callback {
+            override fun onError(e: Exception?) {
+                activity.supportStartPostponedEnterTransition()
+            }
+
+            override fun onSuccess() {
+                activity.supportStartPostponedEnterTransition()
+            }
+        })
+    }
+}
 
 fun View.snack(@StringRes messageRes: Int, length: Int = Snackbar.LENGTH_LONG) {
     snack(resources.getString(messageRes), length)

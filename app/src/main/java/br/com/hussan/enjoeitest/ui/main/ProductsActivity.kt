@@ -2,6 +2,7 @@ package br.com.hussan.enjoeitest.ui.main
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import br.com.hussan.enjoeitest.AppNavigator
@@ -93,8 +94,8 @@ class ProductsActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToDetails(product: Product) {
-        navigator.navigateToProductDetails(product)
+    private fun goToDetails(product: Product, view: View) {
+        navigator.navigateToProductDetails(product, view)
     }
 
     override fun onDestroy() {
