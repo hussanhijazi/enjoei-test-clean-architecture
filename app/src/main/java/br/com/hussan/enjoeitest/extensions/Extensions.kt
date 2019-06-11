@@ -1,10 +1,9 @@
 package br.com.hussan.enjoeitest.extensions
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityOptionsCompat
@@ -33,11 +32,10 @@ fun Snackbar.action(action: String, color: Int? = null, listener: (View) -> Unit
     color?.let { setActionTextColor(color) }
 }
 
-fun Float.spToPx(context: Context) =
-    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, this, context.resources.displayMetrics)
-
-fun Float.pxToSp(context: Context) =
-    this / context.resources.displayMetrics.scaledDensity
+val Int.dp: Int
+    get() = (this / Resources.getSystem().displayMetrics.density).toInt()
+val Int.px: Int
+    get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 
 fun Disposable.add(compositeDisposable: CompositeDisposable) {
     compositeDisposable.add(this)

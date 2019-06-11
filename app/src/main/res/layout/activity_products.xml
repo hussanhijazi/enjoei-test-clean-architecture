@@ -18,7 +18,6 @@
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvProducts"
-                android:clipToPadding="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"

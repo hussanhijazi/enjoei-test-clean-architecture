@@ -48,6 +48,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
     implementation "com.squareup.picasso:picasso:$picassoVersion"
     implementation "com.cloudinary:cloudinary-android:$cloudinaryVersion"
+//    implementation "androidx.paging:paging-runtime:$pagingVersion"
 
     testImplementation "junit:junit:$jUnitVersion"
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"

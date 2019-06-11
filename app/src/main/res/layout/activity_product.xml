@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+                name="product"
+                type="br.com.hussan.enjoeitest.domain.Product"/>
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinatorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:expandedTitleMarginStart="48dp"
+                    app:expandedTitleMarginEnd="64dp"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="428dp"
+                            app:loadImageProduct="@{product.photos}"
+                            app:layout_collapseMode="parallax"/>
+                </FrameLayout>
+
+                <androidx.appcompat.widget.Toolbar
+                        android:background="@drawable/toolbar_gradient"
+                        android:id="@+id/toolbar"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                        app:layout_collapseMode="pin"/>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/txtPrice"
+                        style="@style/priceStyle"
+                        android:textSize="22sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="22dp"
+                        android:text="@{@string/price_format(String.format(`%.2f`, product.price))}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="R$ 90,00"/>
+
+                <TextView
+                        android:id="@+id/txtOriginalPrice"
+                        android:layout_width="wrap_content"
+                        style="@style/priceOriginalStyle"
+                        android:textSize="22sp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{@string/price_format(String.format(`%.2f`, product.originalPrice))}"
+                        app:layout_constraintStart_toEndOf="@+id/txtPrice"
+                        android:visibility="@{product.price &lt; product.originalPrice ? View.VISIBLE : View.GONE}"
+                        app:layout_constraintTop_toTopOf="@+id/txtPrice"
+                        tools:text="R$ 90,00"
+                        tools:ignore="MissingPrefix"/>
+
+                <TextView
+                        android:id="@+id/txtDiscount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="8dp"
+                        style="@style/nameStyle"
+                        app:showDiscountProduct="@{product}"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtPrice"
+                        android:text="10% off em até 12x"/>
+
+                <br.com.hussan.enjoeitest.CircleIconView
+                        android:id="@+id/btnLike"
+                        android:layout_width="56dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        app:setBadgeCount="@{product.likesCount}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:icon="@drawable/ic_like"/>
+
+                <br.com.hussan.enjoeitest.CircleIconView
+                        android:id="@+id/btnComments"
+                        android:layout_width="56dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="16dp"
+                        app:setBadgeCount="@{product.publishedCommentsCount}"
+                        app:layout_constraintEnd_toStartOf="@id/btnLike"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:icon="@drawable/ic_comment"/>
+
+                <TextView
+                        android:id="@+id/titleTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="26dp"
+                        android:layout_marginEnd="20dp"
+                        style="@style/priceStyle"
+                        android:textSize="22sp"
+                        android:text="@{product.title}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtDiscount"
+                        tools:text="vestido zara florido"/>
+
+                <TextView
+                        android:id="@+id/descriptionTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="24dp"
+                        style="@style/priceStyle"
+                        android:textSize="16sp"
+                        android:text="@{product.content}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+                        tools:text="ele ganhou nosso coração! por isso, o espaço do tênis está garantido nas nossas novidades e promete continuar fazendo todas as suas. leia mais"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

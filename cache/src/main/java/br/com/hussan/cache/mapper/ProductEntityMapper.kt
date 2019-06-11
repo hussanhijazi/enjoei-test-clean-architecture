@@ -5,11 +5,29 @@ import br.com.hussan.enjoeitest.domain.Product
 
 class ProductEntityMapper : EntityMapper<ProductEntity, Product> {
     override fun mapFromCached(type: ProductEntity): Product {
-        return Product(type.id, type.title, type.price)
+        return Product(
+            type.id,
+            type.title,
+            type.price,
+            type.originalPrice,
+            type.likesCount,
+            type.maximumInstallment,
+            type.discountPercentage,
+            type.publishedCommentsCount
+        )
     }
 
     override fun mapToCached(type: Product): ProductEntity {
-        return ProductEntity(type.id, type.title, type.price)
+        return ProductEntity(
+            type.id,
+            type.title,
+            type.price,
+            type.originalPrice,
+            type.likesCount,
+            type.maximumInstallment,
+            type.discountPercentage,
+            type.publishedCommentsCount
+        )
     }
 
 }

@@ -41,6 +41,7 @@ ext {
     rxAndroidVersion = '2.1.1'
     appCompatVersion = '1.1.0-alpha02'
     roomVersion = '2.1.0-alpha04'
+//    pagingVersion = '2.1.0-alpha01'
 
     androidxCode = '1.2.0-alpha01'
     constraintLayoutVersion = '1.1.3'

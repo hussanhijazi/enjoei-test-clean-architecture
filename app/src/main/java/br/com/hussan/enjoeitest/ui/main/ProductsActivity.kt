@@ -94,7 +94,7 @@ class ProductsActivity : AppCompatActivity() {
     }
 
     private fun goToDetails(product: Product) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        navigator.navigateToProductDetails(product)
     }
 
     override fun onDestroy() {
