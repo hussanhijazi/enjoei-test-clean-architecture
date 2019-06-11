@@ -19,7 +19,7 @@ data class Product(
     val discountPercentage: Int,
     @SerializedName("published_comments_count")
     val publishedCommentsCount: Int,
-    val content: String? = null,
+    val content: String,
     val photos: List<Photo>? = null,
     val size: String? = null,
     val user: User? = null

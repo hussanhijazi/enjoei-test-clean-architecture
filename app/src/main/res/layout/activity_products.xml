@@ -27,6 +27,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
         <!--<include layout="@layout/lyt_error_connection"/>-->
-        <include layout="@layout/lyt_loading"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <include layout="@layout/lyt_loading"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

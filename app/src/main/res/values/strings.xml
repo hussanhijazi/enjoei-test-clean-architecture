@@ -10,5 +10,7 @@
     <string name="no_results">No results, try again</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="price_format">R$ %1$s</string>
+    <string name="share">Compartilhar</string>
+    <string name="share_msg">Compartilhar produto Enjoei</string>
 
 </resources>
