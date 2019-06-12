@@ -125,8 +125,8 @@ class ListProductsFragment : Fragment() {
 
     }
 
-    private fun goToDetails(product: Product, view: View) {
-        navigator.navigateToProductDetails(product, view)
+    private fun goToDetails(product: Product) {
+        navigator.navigateToProductDetails(product)
     }
 
     override fun onDestroy() {

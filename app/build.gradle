@@ -49,6 +49,7 @@ dependencies {
     implementation "com.squareup.picasso:picasso:$picassoVersion"
     implementation "com.cloudinary:cloudinary-android:$cloudinaryVersion"
 //    implementation "androidx.paging:paging-runtime:$pagingVersion"
+    implementation "com.romandanylyk:pageindicatorview:1.0.3"
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation "junit:junit:$jUnitVersion"
