@@ -7,13 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import br.com.hussan.enjoeitest.AppNavigator
 import br.com.hussan.enjoeitest.R
+import br.com.hussan.enjoeitest.data.response.ProductsPagination
+import br.com.hussan.enjoeitest.domain.Pagination
 import br.com.hussan.enjoeitest.domain.Product
 import br.com.hussan.enjoeitest.extensions.add
 import br.com.hussan.enjoeitest.extensions.hide
 import br.com.hussan.enjoeitest.extensions.show
 import br.com.hussan.enjoeitest.extensions.snack
+import br.com.hussan.enjoeitest.util.EndlessRecyclerViewScrollListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -26,32 +30,32 @@ import org.koin.core.parameter.parametersOf
 
 class ListProductsFragment : Fragment() {
 
+    private lateinit var pagination: Pagination
+    private lateinit var products: ProductsPagination
     private val viewModel: ProductsViewModel by viewModel()
     private val navigator: AppNavigator by inject { parametersOf(activity) }
     private val compositeDisposable = CompositeDisposable()
     private val productAdapter by lazy { ProductsAdapter(::goToDetails) }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.activity_products, container, false)
-        return view
+        return inflater.inflate(R.layout.activity_products, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerViewProducts()
         setupSwipeRefresh()
-        getProducts()
+        getProducts(1)
     }
 
     private fun setupSwipeRefresh() {
         swipeRefresh.setOnRefreshListener {
-            getProducts()
+            getProducts(1)
         }
     }
 
-    private fun getProducts() {
-        viewModel.getProducts(1)
+    private fun getProducts(page: Int) {
+        viewModel.getProducts(page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { showLoading(true) }
@@ -61,10 +65,11 @@ class ListProductsFragment : Fragment() {
             .add(compositeDisposable)
     }
 
-    private fun showProducts(items: List<Product>) {
-        if (items.isNotEmpty()) {
-            productAdapter.setItems(items)
-            showRecyclerViewFacts()
+    private fun showProducts(items: ProductsPagination) {
+        if (items.products.isNotEmpty()) {
+            pagination = items.pagination
+            productAdapter.addItems(items.products)
+            showRecyclerViewProducts()
             if (swipeRefresh.isRefreshing)
                 swipeRefresh.isRefreshing = false
         } else
@@ -75,7 +80,7 @@ class ListProductsFragment : Fragment() {
         rvProducts.hide()
     }
 
-    private fun showRecyclerViewFacts() {
+    private fun showRecyclerViewProducts() {
         rvProducts.show()
     }
 
@@ -94,9 +99,19 @@ class ListProductsFragment : Fragment() {
     private fun setupRecyclerViewProducts() {
         rvProducts.run {
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(activity, 2)
+            val gridLayout = GridLayoutManager(activity, 2)
+            layoutManager = gridLayout
             adapter = productAdapter
+
+            val scrollListener = object : EndlessRecyclerViewScrollListener(gridLayout) {
+                override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                    if (pagination.totalPages >= page)
+                        getProducts(page)
+                }
+            }
+            addOnScrollListener(scrollListener)
         }
+
     }
 
     private fun goToDetails(product: Product, view: View) {
@@ -107,6 +122,5 @@ class ListProductsFragment : Fragment() {
         super.onDestroy()
         compositeDisposable.clear()
     }
-
-
 }
+

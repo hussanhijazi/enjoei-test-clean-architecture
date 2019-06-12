@@ -5,7 +5,7 @@ import br.com.hussan.enjoeitest.data.cache.ProductCache
 import br.com.hussan.enjoeitest.data.datasource.ProductDatasource
 import br.com.hussan.enjoeitest.data.datasource.ProductRepository
 import br.com.hussan.enjoeitest.data.mock
-import br.com.hussan.enjoeitest.data.response.ProductsResponse
+import br.com.hussan.enjoeitest.data.response.ProductsPagination
 import br.com.hussan.enjoeitest.domain.*
 import com.google.gson.Gson
 import io.reactivex.Completable
@@ -64,7 +64,7 @@ class ProductRepositoryTest {
     fun `Get facts remote and save locally`() {
 
         val page = 1
-        val productsResponse = ProductsResponse(
+        val productsResponse = ProductsPagination(
             Pagination(1, 1),
             listOf(
                 Product(

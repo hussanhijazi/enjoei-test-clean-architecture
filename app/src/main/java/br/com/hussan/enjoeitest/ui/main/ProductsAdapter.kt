@@ -31,6 +31,11 @@ class ProductsAdapter(private val clickListenerItem: (Product, ImageView) -> Uni
         notifyDataSetChanged()
     }
 
+    fun addItems(items: List<Product>) {
+        products += items
+        notifyDataSetChanged()
+    }
+
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = products[position]
         holder.binding.product = product

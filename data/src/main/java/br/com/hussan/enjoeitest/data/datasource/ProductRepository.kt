@@ -2,22 +2,23 @@ package br.com.hussan.enjoeitest.data.datasource
 
 import br.com.hussan.enjoeitest.data.AppApi
 import br.com.hussan.enjoeitest.data.cache.ProductCache
-import br.com.hussan.enjoeitest.domain.Product
+import br.com.hussan.enjoeitest.data.response.ProductsPagination
 import io.reactivex.Observable
 
 class ProductRepository(
     private val api: AppApi, private val cache: ProductCache
 ) : ProductDatasource {
 
-    override fun getProducts(page: Int): Observable<List<Product>> {
+    override fun getProducts(page: Int): Observable<ProductsPagination> {
 
-        return api.getProducts(page).map { it.products }.flatMap {
-            cache.save(it).andThen(Observable.just(it))
-        }
+        return api.getProducts(page)
+            .flatMap {
+                cache.save(it.products).andThen(Observable.just(it))
+            }
     }
 
 }
 
 interface ProductDatasource {
-    fun getProducts(page: Int): Observable<List<Product>>
+    fun getProducts(page: Int): Observable<ProductsPagination>
 }
