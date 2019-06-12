@@ -78,7 +78,7 @@ class ProductDetailsActivity : AppCompatActivity() {
             R.id.share -> {
                 val i = Intent(Intent.ACTION_SEND)
                 i.type = "text/plain"
-                i.putExtra(Intent.EXTRA_TEXT, product.title)
+                i.putExtra(Intent.EXTRA_TEXT, "${product.title} po ${product.price} na Enjoei")
                 startActivity(Intent.createChooser(i, getString(R.string.share_msg)))
                 true
             }

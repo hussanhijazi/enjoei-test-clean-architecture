@@ -10,7 +10,6 @@ class ProductRepository(
 ) : ProductDatasource {
 
     override fun getProducts(page: Int): Observable<ProductsPagination> {
-
         return api.getProducts(page)
             .flatMap {
                 cache.save(it.products).andThen(Observable.just(it))

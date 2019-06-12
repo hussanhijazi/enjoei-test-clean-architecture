@@ -1,6 +1,5 @@
 package br.com.hussan.enjoeitest.ui.main
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.com.hussan.enjoeitest.data.response.ProductsPagination
@@ -14,7 +13,6 @@ class ProductsViewModel(
 
     fun getProducts(page: Int) = getProducts.invoke(page)
         .doOnNext {
-            Log.d("h22", it.toString())
             results.postValue(it)
         }
 

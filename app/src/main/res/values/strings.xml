@@ -18,5 +18,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="try_again">tentar de novo</string>
+    <string name="connection_error">nosso cyber voo tá chacoalhando. dê uma checada na sua internet pra continuar com a gente :P</string>
+    <string name="connection_error_title">turbuências na rede</string>
 
 </resources>
