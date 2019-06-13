@@ -1,6 +1,7 @@
 package br.com.hussan.cache.mapper
 
 import br.com.hussan.cache.PRODUCT
+import br.com.hussan.cache.PRODUCT_ENTITY
 import br.com.hussan.cache.model.ProductEntity
 import br.com.hussan.enjoeitest.domain.Product
 import junit.framework.Assert.assertEquals
@@ -29,10 +30,9 @@ class ProductEntityMapperTest {
 
     @Test
     fun mapFromCachedMapsData() {
-        val cachedProduct = ProductEntity(1, "cat")
-        val product = productEntityMapper.mapFromCached(cachedProduct)
+        val product = productEntityMapper.mapFromCached(PRODUCT_ENTITY)
 
-        assertDataEquality(product, cachedProduct)
+        assertDataEquality(product, PRODUCT_ENTITY)
     }
 
     private fun assertDataEquality(

@@ -1,12 +1,13 @@
 package br.com.hussan.enjoeitest.data.dataSource
 
 import br.com.hussan.enjoeitest.data.AppApi
+import br.com.hussan.enjoeitest.data.PRODUCTS
 import br.com.hussan.enjoeitest.data.cache.ProductCache
 import br.com.hussan.enjoeitest.data.datasource.ProductDatasource
 import br.com.hussan.enjoeitest.data.datasource.ProductRepository
 import br.com.hussan.enjoeitest.data.mock
 import br.com.hussan.enjoeitest.data.response.ProductsPagination
-import br.com.hussan.enjoeitest.domain.*
+import br.com.hussan.enjoeitest.domain.Pagination
 import com.google.gson.Gson
 import io.reactivex.Completable
 import okhttp3.OkHttpClient
@@ -66,12 +67,7 @@ class ProductRepositoryTest {
         val page = 1
         val productsResponse = ProductsPagination(
             Pagination(1, 1),
-            listOf(
-                Product(
-                    "id", 1, 1, 1, 1, 1, listOf(Photo("", "", "")),
-                    1F, 1, "m", "", User(Avatar("", "", ""), 1, "")
-                )
-            )
+            PRODUCTS
         )
         val path = "/products/home?page=$page"
 
@@ -88,7 +84,7 @@ class ProductRepositoryTest {
 
         repository.getProducts(page).test().apply {
             awaitTerminalEvent(1, TimeUnit.SECONDS)
-            assertValue(productsResponse.products)
+            assertValue(productsResponse)
             assertNoErrors()
             assertValueCount(1)
         }

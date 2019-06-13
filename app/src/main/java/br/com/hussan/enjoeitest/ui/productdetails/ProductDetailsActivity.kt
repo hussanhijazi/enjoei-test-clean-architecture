@@ -25,10 +25,8 @@ class ProductDetailsActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_product)
 
         setupToolbar()
-//        setImageTransition()
         setImages()
         binding.product = product
-
         txtOriginalPrice.paintFlags = txtOriginalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 
     }

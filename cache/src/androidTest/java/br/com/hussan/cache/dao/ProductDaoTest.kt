@@ -6,8 +6,8 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import br.com.hussan.cache.AppDatabase
+import br.com.hussan.cache.PRODUCTS_ENTITY
 import br.com.hussan.cache.dao.ProductDao
-import br.com.hussan.cache.model.ProductEntity
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -42,9 +42,7 @@ class ProductDaoTest {
     @Test
     fun saveProducts() {
 
-        val products = listOf(ProductEntity(1, "title"))
-
-        productDao.insertAll(products).test()
+        productDao.insertAll(PRODUCTS_ENTITY).test()
             .assertComplete()
             .assertNoValues()
 
@@ -53,14 +51,12 @@ class ProductDaoTest {
     @Test
     fun loadCategories() {
 
-        val products = listOf(ProductEntity(1, "title"))
-
-        productDao.insertAll(products).test()
+        productDao.insertAll(PRODUCTS_ENTITY).test()
             .assertNoValues()
             .assertComplete()
 
         productDao.loadProducts().test()
-            .assertValue(products)
+            .assertValue(PRODUCTS_ENTITY)
     }
 }
 

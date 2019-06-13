@@ -13,7 +13,7 @@ data class Product(
     val discountPercentage: Int,
     val publishedCommentsCount: Int,
     val content: String,
-    val photos: List<Photo>? = null,
-    val size: String? = null,
-    val user: User? = null
+    val size: String?,
+    val photos: List<Photo>?,
+    val user: User?
 ) : Serializable

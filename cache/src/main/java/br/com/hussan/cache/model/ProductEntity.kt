@@ -14,5 +14,6 @@ data class ProductEntity(
     @ColumnInfo(name = "maximum_installment") val maximumInstallment: Int,
     @ColumnInfo(name = "discount_percentage") val discountPercentage: Int,
     @ColumnInfo(name = "published_comments_count") val publishedCommentsCount: Int,
-    @ColumnInfo(name = "content") val content: String
+    @ColumnInfo(name = "content") val content: String,
+    @ColumnInfo(name = "site") val size: String?
 )

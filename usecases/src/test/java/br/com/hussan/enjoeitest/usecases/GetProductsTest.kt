@@ -1,6 +1,8 @@
 package br.com.hussan.enjoeitest.usecases
 
 import br.com.hussan.enjoeitest.data.datasource.ProductDatasource
+import br.com.hussan.enjoeitest.data.response.ProductsPagination
+import br.com.hussan.enjoeitest.domain.Pagination
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -24,11 +26,14 @@ class GetProductsTest {
     fun `Get products call locally`() {
 
         val page = 1
-
-        `when`(repository.getProducts(page)).thenReturn(Observable.just(PRODUCTS))
+        val productsResponse = ProductsPagination(
+            Pagination(1, 1),
+            PRODUCTS
+        )
+        `when`(repository.getProducts(page)).thenReturn(Observable.just(productsResponse))
 
         getProducts.invoke(page).test()
-            .assertValue(PRODUCTS)
+            .assertValue(productsResponse)
             .assertNoErrors()
             .assertComplete()
 

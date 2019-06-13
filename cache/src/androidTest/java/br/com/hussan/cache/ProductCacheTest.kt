@@ -41,15 +41,4 @@ class ProductCacheTest {
 
     }
 
-    @Test
-    fun saveSearchAndGet() {
-
-        productCache.save(PRODUCTS).test()
-            .assertNoValues()
-            .assertComplete()
-
-        productCache.get(1).test()
-            .assertValue(PRODUCTS)
-    }
-
 }

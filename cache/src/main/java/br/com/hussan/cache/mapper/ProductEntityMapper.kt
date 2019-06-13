@@ -14,7 +14,10 @@ class ProductEntityMapper : EntityMapper<ProductEntity, Product> {
             type.maximumInstallment,
             type.discountPercentage,
             type.publishedCommentsCount,
-            type.content
+            type.content,
+            type.size,
+            null,
+            null
         )
     }
 
@@ -28,8 +31,8 @@ class ProductEntityMapper : EntityMapper<ProductEntity, Product> {
             type.maximumInstallment,
             type.discountPercentage,
             type.publishedCommentsCount,
-            type.content
+            type.content,
+            type.size
         )
     }
-
 }

@@ -22,11 +22,11 @@
             android:layout_width="21dp"
             android:layout_height="21dp"
             android:gravity="center"
+            android:textSize="12sp"
             android:background="@drawable/view_circle_notification"
             android:textColor="@android:color/white"
             android:id="@+id/txtBadgeCount"
             android:layout_marginTop="1dp"
-            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 

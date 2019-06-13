@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#D81B60</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#008577</color>
+    <color name="colorPrimaryDark">#B30443</color>
+    <color name="colorAccent">#333333</color>
 
     <color name="enjoei_red">#F77274</color>
     <color name="gray_separator">#F4F2F0</color>
+    <color name="circle_color">#E2E0DE</color>
     <color name="gray_like">#7D7A77</color>
-    <color name="gray_like2">#5B5855</color>
     <color name="gray_text">#5B5855</color>
 </resources>

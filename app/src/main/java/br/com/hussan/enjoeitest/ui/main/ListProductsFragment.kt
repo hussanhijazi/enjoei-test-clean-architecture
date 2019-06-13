@@ -1,7 +1,6 @@
 package br.com.hussan.enjoeitest.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -89,10 +88,11 @@ class ListProductsFragment : Fragment() {
     private fun showRecyclerViewProducts() {
         rvProducts.show()
         lytConnectionError.hide()
+        if (swipeRefresh.isRefreshing)
+            swipeRefresh.isRefreshing = false
     }
 
     private fun showError(error: Throwable) {
-        Log.d("h2", error.message)
         when (error) {
             is UnknownHostException -> lytConnectionError.show()
             else -> lytRoot.snack(R.string.error_message)

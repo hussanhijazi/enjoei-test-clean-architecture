@@ -1,4 +1,4 @@
-package br.com.hussan.enjoeitest.usecases
+package br.com.hussan.enjoeitest.data
 
 import br.com.hussan.enjoeitest.domain.Avatar
 import br.com.hussan.enjoeitest.domain.Photo
