@@ -86,15 +86,17 @@ class ListProductsFragment : Fragment() {
     }
 
     private fun showRecyclerViewProducts() {
+        imgBanner.show()
         rvProducts.show()
         lytConnectionError.hide()
-        if (swipeRefresh.isRefreshing)
-            swipeRefresh.isRefreshing = false
     }
 
     private fun showError(error: Throwable) {
         when (error) {
-            is UnknownHostException -> lytConnectionError.show()
+            is UnknownHostException -> {
+                lytConnectionError.show()
+                imgBanner.hide()
+            }
             else -> lytRoot.snack(R.string.error_message)
         }
     }
@@ -109,6 +111,8 @@ class ListProductsFragment : Fragment() {
     private fun setupRecyclerViewProducts() {
         rvProducts.run {
             setHasFixedSize(true)
+            isNestedScrollingEnabled = false
+
             val gridLayout = GridLayoutManager(activity, 2)
             layoutManager = gridLayout
             adapter = productAdapter
@@ -120,6 +124,7 @@ class ListProductsFragment : Fragment() {
                         getProducts(page)
                 }
             }
+
             addOnScrollListener(scrollListener)
         }
 
@@ -134,4 +139,3 @@ class ListProductsFragment : Fragment() {
         compositeDisposable.clear()
     }
 }
-
