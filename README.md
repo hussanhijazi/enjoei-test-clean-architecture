@@ -1,5 +1,4 @@
 # Clean Architecture
-App em usando a api do Chuck Norris https://api.chucknorris.io/.
 
 ## Código
 Estou usando *Clean Architecture* baseada na implementação do Antonio Leiva e da BufferApp.
@@ -37,21 +36,25 @@ Usamos o Bitrise.io para integração contínua.
 ## Testes
 Temos testes nos módulos: *app*, *cache*, *data*, e *usecases*.
 
-#### app
+### app
 Nesse módulo testamos os *ViewModels*
 
-#### cache
+### cache
 Nesse módulo testamos a gravação e carregamento dos dados no *Room*.
 
-#### data
+### data
 Nesse módulo testamos os repositórios.
 
-#### usecases
+### usecases
 Nesse módulo testamos os *usescases*.
 
 ## Rodar testes
-Teste unitários: ./scripts/tests.sh
-Teste de ui: ./scripts/androidTests.sh
+Teste unitários: `./scripts/tests.sh`
+
+Teste de ui: `./scripts/androidTests.sh`
+
+## Lint/Detekt
+Rodar lint: `./scripts/lint.sh`
 
 ## Referências
 * Artigo: https://antonioleiva.com/clean-architecture-android/
