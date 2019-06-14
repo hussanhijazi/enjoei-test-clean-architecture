@@ -1,5 +1,6 @@
 package br.com.hussan.enjoeitest.ui.productdetails
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
@@ -19,6 +20,16 @@ class ProductDetailsActivity : AppCompatActivity() {
     private val product: Product
         get() = intent.getSerializableExtra(AppNavigator.PRODUCT) as Product
 
+    companion object {
+        private const val PRODUCT = "PRODUCT"
+
+        fun newIntent(context: Context, product: Product): Intent {
+            val intent = Intent(context, ProductDetailsActivity::class.java)
+            intent.putExtra(PRODUCT, product)
+            return intent
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -26,6 +37,7 @@ class ProductDetailsActivity : AppCompatActivity() {
 
         setupToolbar()
         setImages()
+
         binding.product = product
         txtOriginalPrice.paintFlags = txtOriginalPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 

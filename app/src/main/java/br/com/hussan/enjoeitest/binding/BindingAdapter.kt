@@ -3,11 +3,12 @@ package br.com.hussan.enjoeitest.binding
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import br.com.hussan.enjoeitest.R
 import br.com.hussan.enjoeitest.domain.Avatar
 import br.com.hussan.enjoeitest.domain.Photo
 import br.com.hussan.enjoeitest.domain.Product
+import br.com.hussan.enjoeitest.extensions.formatPrice
 import br.com.hussan.enjoeitest.extensions.hide
-import br.com.hussan.enjoeitest.views.CircleIconView
 import br.com.hussan.enjoeitest.views.ImageLoadingView
 import com.cloudinary.android.MediaManager
 import com.squareup.picasso.Callback
@@ -43,24 +44,6 @@ fun imageLoadingProduct(view: ImageLoadingView, photos: List<Photo?>) {
     }
 }
 
-//@BindingAdapter("bind:loadImageProduct")
-//fun loadImageProduct(view: ImageView, photos: List<Photo?>) {
-//    view.post {
-//        val imageUrl = photos?.first()?.run {
-//            MediaManager.get().url().secure(true).run {
-//                transformation(
-//                    transformation()
-//                        .crop(crop)
-//                        .gravity(gravity)
-//                        .width(view.measuredWidth)
-//                        .height(view.measuredHeight)
-//                ).generate("$publicId.jpg")
-//            }
-//        }
-//        Picasso.get().load(imageUrl).into(view)
-//    }
-//}
-
 @BindingAdapter("bind:showDiscountProduct")
 fun showDiscountProduct(view: TextView, product: Product) {
     val showDiscount = product.discountPercentage > 0
@@ -72,9 +55,9 @@ fun showDiscountProduct(view: TextView, product: Product) {
 
 }
 
-@BindingAdapter("bind:setBadgeCount")
-fun setBadgeCount(view: CircleIconView, product: Product) {
-    view.setBadgeCount(product.publishedCommentsCount ?: 0)
+@BindingAdapter("bind:formatPrice")
+fun formatPrice(view: TextView, price: Double) {
+    view.text = view.context.getString(R.string.price_format, price.formatPrice())
 }
 
 @BindingAdapter("bind:loadImageAvatar")

@@ -5,17 +5,14 @@ import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import androidx.annotation.StringRes
 import androidx.core.app.ActivityOptionsCompat
-import androidx.fragment.app.FragmentActivity
 import com.cloudinary.android.MediaManager
 import com.google.android.material.snackbar.Snackbar
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
+fun Double.formatPrice() = String.format("%.2f", this)
 
 fun MediaManager.getUrl(publicId: String, crop: String, gravity: String, width: Int, height: Int) =
     MediaManager.get().url().secure(true).run {
@@ -27,20 +24,6 @@ fun MediaManager.getUrl(publicId: String, crop: String, gravity: String, width: 
                 .height(height)
         ).generate("$publicId.jpg")
     }
-
-fun ImageView.loadTransition(activity: FragmentActivity, imageUrl: String?) {
-    imageUrl?.let {
-        Picasso.get().load(imageUrl).noFade().into(this, object : Callback {
-            override fun onError(e: Exception?) {
-                activity.supportStartPostponedEnterTransition()
-            }
-
-            override fun onSuccess() {
-                activity.supportStartPostponedEnterTransition()
-            }
-        })
-    }
-}
 
 fun View.snack(@StringRes messageRes: Int, length: Int = Snackbar.LENGTH_LONG) {
     snack(resources.getString(messageRes), length)
@@ -54,17 +37,6 @@ fun View.snack(
     snack.show()
 }
 
-fun Snackbar.action(@StringRes actionRes: Int, color: Int? = null, listener: (View) -> Unit) {
-    action(view.resources.getString(actionRes), color, listener)
-}
-
-fun Snackbar.action(action: String, color: Int? = null, listener: (View) -> Unit) {
-    setAction(action, listener)
-    color?.let { setActionTextColor(color) }
-}
-
-val Int.dp: Int
-    get() = (this / Resources.getSystem().displayMetrics.density).toInt()
 val Int.px: Int
     get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 

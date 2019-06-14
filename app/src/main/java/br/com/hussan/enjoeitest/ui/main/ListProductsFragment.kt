@@ -33,7 +33,7 @@ class ListProductsFragment : Fragment() {
     private lateinit var scrollListener: EndlessRecyclerOnScrollListener
     private var actualPage: Int = 1
     private lateinit var pagination: Pagination
-    private val viewModel: ProductsViewModel by viewModel()
+    private val viewModelList: ListProductsViewModel by viewModel()
     private val navigator: AppNavigator by inject { parametersOf(activity) }
     private val compositeDisposable = CompositeDisposable()
     private val productAdapter by lazy { ProductsAdapter(::goToDetails) }
@@ -65,7 +65,7 @@ class ListProductsFragment : Fragment() {
     }
 
     private fun getProducts(page: Int) {
-        viewModel.getProducts(page)
+        viewModelList.getProducts(page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { showLoading(true) }

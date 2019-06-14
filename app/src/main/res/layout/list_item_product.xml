@@ -52,6 +52,21 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
+            <TextView
+                    android:id="@+id/txtDiscount"
+                    android:background="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="10%"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="@{product.discountPercentage &gt; 0 ? `- ` + product.discountPercentage + `%`: ``}"
+                    android:visibility="@{product.discountPercentage &gt; 0 ? View.VISIBLE : View.GONE}"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
             <LinearLayout
                     android:id="@+id/lytTxtPrice"
                     android:layout_width="wrap_content"
@@ -67,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/txtPrice"
-                        android:text="@{@string/price_format(String.format(`%.2f`, product.price))}"
+                        app:formatPrice="@{product.price}"
                         app:layout_constraintStart_toStartOf="parent"/>
 
                 <TextView
