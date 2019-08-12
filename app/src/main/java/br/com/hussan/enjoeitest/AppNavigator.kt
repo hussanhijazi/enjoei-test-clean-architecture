@@ -2,7 +2,7 @@ package br.com.hussan.enjoeitest
 
 import android.app.Activity
 import android.os.Bundle
-import br.com.hussan.enjoeitest.domain.Product
+import br.com.hussan.enjoeitest.data.model.ProductView
 import br.com.hussan.enjoeitest.extensions.navigate
 import br.com.hussan.enjoeitest.ui.productdetails.ProductDetailsActivity
 
@@ -12,9 +12,9 @@ class AppNavigator(private val activity: Activity) {
         const val PRODUCT = "PRODUCT"
     }
 
-    fun navigateToProductDetails(product: Product) {
+    fun navigateToProductDetails(product: ProductView) {
         val bundle = Bundle().apply {
-            putSerializable(PRODUCT, product)
+            putParcelable(PRODUCT, product)
         }
         activity.navigate<ProductDetailsActivity>(bundle)
     }

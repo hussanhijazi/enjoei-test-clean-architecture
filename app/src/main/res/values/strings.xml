@@ -4,20 +4,12 @@
     <string name="camera">Câmera</string>
     <string name="mail">E-mail</string>
     <string name="user">Usuário</string>
-    <string name="send_to">Send</string>
-    <string name="enter_your_search_term">Enter your search term</string>
-    <string name="suggestions">Suggestions</string>
-    <string name="past_searches">Past Searches</string>
-    <string name="uncategorized">Uncategorized</string>
     <string name="error_message">An error has occurred. Please try again</string>
-    <string name="no_results">No results, try again</string>
-    <string name="title_activity_main">MainActivity</string>
     <string name="price_format">R$ %1$s</string>
     <string name="share">Compartilhar</string>
     <string name="share_msg">Compartilhar produto Enjoei</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="try_again">tentar de novo</string>
     <string name="connection_error">nosso cyber voo tá chacoalhando. dê uma checada na sua internet pra continuar com a gente :P</string>
     <string name="connection_error_title">turbuências na rede</string>

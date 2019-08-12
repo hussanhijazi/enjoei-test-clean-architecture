@@ -9,7 +9,7 @@
 
         <variable
                 name="product"
-                type="br.com.hussan.enjoeitest.domain.Product"/>
+                type="br.com.hussan.enjoeitest.data.model.ProductView"/>
     </data>
 
 

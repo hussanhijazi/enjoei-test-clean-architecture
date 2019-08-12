@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val apiModule = module {
     single {
-        createWebService<AppApi>(get(), "https://private-anon-ca836e69e6-enjoeitest.apiary-mock.com/")
+        createWebService<AppApi>(get(), "https://private-28c2cc-productsenjoei.apiary-mock.com/")
     }
     factory {
         val interceptor = HttpLoggingInterceptor()

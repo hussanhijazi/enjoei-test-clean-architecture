@@ -4,9 +4,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import br.com.hussan.enjoeitest.R
+import br.com.hussan.enjoeitest.data.model.ProductView
 import br.com.hussan.enjoeitest.domain.Avatar
 import br.com.hussan.enjoeitest.domain.Photo
-import br.com.hussan.enjoeitest.domain.Product
 import br.com.hussan.enjoeitest.extensions.formatPrice
 import br.com.hussan.enjoeitest.extensions.hide
 import br.com.hussan.enjoeitest.views.ImageLoadingView
@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso
 @BindingAdapter("bind:imageLoadingProduct")
 fun imageLoadingProduct(view: ImageLoadingView, photos: List<Photo?>) {
     view.post {
-        val imageUrl = photos?.first()?.run {
+        val imageUrl = photos.first()?.run {
             MediaManager.get().url().secure(true).run {
                 transformation(
                     transformation()
@@ -45,7 +45,7 @@ fun imageLoadingProduct(view: ImageLoadingView, photos: List<Photo?>) {
 }
 
 @BindingAdapter("bind:showDiscountProduct")
-fun showDiscountProduct(view: TextView, product: Product) {
+fun showDiscountProduct(view: TextView, product: ProductView) {
     val showDiscount = product.discountPercentage > 0
     view.text = if (showDiscount) {
         "${product.discountPercentage}% off em até ${product.maximumInstallment}x"
@@ -63,7 +63,7 @@ fun formatPrice(view: TextView, price: Double) {
 @BindingAdapter("bind:loadImageAvatar")
 fun loadImageAvatar(view: ImageView, avatar: Avatar) {
 
-    val imageUrl = avatar?.run {
+    val imageUrl = avatar.run {
         MediaManager.get().url().secure(true).run {
             transformation(
                 transformation()

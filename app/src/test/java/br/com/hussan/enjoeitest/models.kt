@@ -1,4 +1,4 @@
-package br.com.hussan.enjoeitest.main
+package br.com.hussan.enjoeitest
 
 import br.com.hussan.enjoeitest.domain.Avatar
 import br.com.hussan.enjoeitest.domain.Photo

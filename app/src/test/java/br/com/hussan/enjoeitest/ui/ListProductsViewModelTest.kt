@@ -1,9 +1,11 @@
-package br.com.hussan.cleanarch.ui.main
+package br.com.hussan.enjoeitest.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import br.com.hussan.enjoeitest.PRODUCTS
+import br.com.hussan.enjoeitest.data.mapper.ProductViewMapper
+import br.com.hussan.enjoeitest.data.mapper.ProductsPaginationViewMapper
 import br.com.hussan.enjoeitest.data.response.ProductsPagination
 import br.com.hussan.enjoeitest.domain.Pagination
-import br.com.hussan.enjoeitest.main.PRODUCTS
 import br.com.hussan.enjoeitest.ui.main.ListProductsViewModel
 import br.com.hussan.enjoeitest.usecases.GetProducts
 import io.reactivex.Observable
@@ -18,11 +20,14 @@ class ListProductsViewModelTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
     private val getProducts: GetProducts = mock()
+    private val mapper: ProductsPaginationViewMapper by lazy {
+        ProductsPaginationViewMapper(ProductViewMapper())
+    }
     private lateinit var mViewModelList: ListProductsViewModel
 
     @Before
     fun setUp() {
-        mViewModelList = ListProductsViewModel(getProducts)
+        mViewModelList = ListProductsViewModel(getProducts, mapper)
     }
 
     @Test
@@ -37,7 +42,7 @@ class ListProductsViewModelTest {
 
         mViewModelList.getProducts(page)
             .test()
-            .assertValue(productsResponse)
+            .assertValue(mapper.mapToView(productsResponse))
             .assertComplete()
 
         verify(getProducts).invoke(1)

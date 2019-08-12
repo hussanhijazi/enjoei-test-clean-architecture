@@ -1,6 +1,12 @@
-package br.com.hussan.enjoeitest.domain
+package br.com.hussan.enjoeitest.data.model
 
-data class Product(
+import android.os.Parcelable
+import br.com.hussan.enjoeitest.domain.Photo
+import br.com.hussan.enjoeitest.domain.User
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class ProductView(
     val id: Int,
     val title: String,
     val price: Double,
@@ -13,4 +19,5 @@ data class Product(
     val size: String?,
     val photos: List<Photo>?,
     val user: User?
-)
+) : Parcelable
+

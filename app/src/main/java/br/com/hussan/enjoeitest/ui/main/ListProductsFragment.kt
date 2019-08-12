@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import br.com.hussan.enjoeitest.AppNavigator
 import br.com.hussan.enjoeitest.R
-import br.com.hussan.enjoeitest.data.response.ProductsPagination
+import br.com.hussan.enjoeitest.data.model.ProductView
+import br.com.hussan.enjoeitest.data.model.ProductsPaginationView
 import br.com.hussan.enjoeitest.domain.Pagination
-import br.com.hussan.enjoeitest.domain.Product
 import br.com.hussan.enjoeitest.extensions.add
 import br.com.hussan.enjoeitest.extensions.hide
 import br.com.hussan.enjoeitest.extensions.show
@@ -75,7 +75,7 @@ class ListProductsFragment : Fragment() {
             .add(compositeDisposable)
     }
 
-    private fun showProducts(items: ProductsPagination) {
+    private fun showProducts(items: ProductsPaginationView) {
         if (items.products.isNotEmpty()) {
             pagination = items.pagination
             productAdapter.addItems(items.products)
@@ -130,7 +130,7 @@ class ListProductsFragment : Fragment() {
 
     }
 
-    private fun goToDetails(product: Product) {
+    private fun goToDetails(product: ProductView) {
         navigator.navigateToProductDetails(product)
     }
 

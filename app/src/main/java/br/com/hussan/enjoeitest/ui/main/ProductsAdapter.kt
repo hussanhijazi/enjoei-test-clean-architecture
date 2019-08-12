@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import br.com.hussan.enjoeitest.R
+import br.com.hussan.enjoeitest.data.model.ProductView
 import br.com.hussan.enjoeitest.databinding.ListItemProductBinding
-import br.com.hussan.enjoeitest.domain.Product
 
-class ProductsAdapter(private val clickListenerItem: (Product) -> Unit) :
+class ProductsAdapter(private val clickListenerItem: (ProductView) -> Unit) :
     RecyclerView.Adapter<ProductsAdapter.ProductViewHolder>() {
 
-    private var products: List<Product> = listOf()
+    private var products: List<ProductView> = listOf()
 
     inner class ProductViewHolder(val binding: ListItemProductBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -23,12 +23,12 @@ class ProductsAdapter(private val clickListenerItem: (Product) -> Unit) :
         return ProductViewHolder(binding)
     }
 
-    fun setItems(items: List<Product>) {
+    fun setItems(items: List<ProductView>) {
         products = items
         notifyDataSetChanged()
     }
 
-    fun addItems(items: List<Product>) {
+    fun addItems(items: List<ProductView>) {
         products += items
         notifyDataSetChanged()
     }

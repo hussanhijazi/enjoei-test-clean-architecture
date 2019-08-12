@@ -10,20 +10,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import br.com.hussan.enjoeitest.AppNavigator
 import br.com.hussan.enjoeitest.R
+import br.com.hussan.enjoeitest.data.model.ProductView
 import br.com.hussan.enjoeitest.databinding.ActivityProductBinding
 import br.com.hussan.enjoeitest.domain.Photo
-import br.com.hussan.enjoeitest.domain.Product
 import kotlinx.android.synthetic.main.activity_product.*
 
 class ProductDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductBinding
-    private val product: Product
-        get() = intent.getSerializableExtra(AppNavigator.PRODUCT) as Product
+    private val product: ProductView
+        get() = intent.getParcelableExtra(AppNavigator.PRODUCT) as ProductView
 
     companion object {
         private const val PRODUCT = "PRODUCT"
 
-        fun newIntent(context: Context, product: Product): Intent {
+        fun newIntent(context: Context, product: ProductView): Intent {
             val intent = Intent(context, ProductDetailsActivity::class.java)
             intent.putExtra(PRODUCT, product)
             return intent
@@ -44,7 +44,6 @@ class ProductDetailsActivity : AppCompatActivity() {
     }
 
     private fun setImages() {
-
         product.photos?.let {
             if (it.isNotEmpty()) {
                 initImageSlider(it)
